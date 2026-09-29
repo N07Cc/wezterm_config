@@ -190,8 +190,12 @@ local windows_keys = {
 	-- Windows 分屏：Alt+d 左右，Alt+Shift+d 上下
 	{ key = "d", mods = "ALT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "d", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	{ key = "[", mods = "ALT", action = act.ActivateTabRelative(-1) },
-	{ key = "]", mods = "ALT", action = act.ActivateTabRelative(1) },
+	-- 对应 macOS 的 Cmd+[/]：循环切换 pane（phys: 避开中文输入法把 [ 改写成 【）
+	{ key = "phys:LeftBracket", mods = "ALT", action = act.ActivatePaneDirection("Prev") },
+	{ key = "phys:RightBracket", mods = "ALT", action = act.ActivatePaneDirection("Next") },
+	-- 对应 macOS 的 Cmd+Shift+[/]：切换 tab
+	{ key = "phys:LeftBracket", mods = "ALT|SHIFT", action = act.ActivateTabRelative(-1) },
+	{ key = "phys:RightBracket", mods = "ALT|SHIFT", action = act.ActivateTabRelative(1) },
 }
 
 M.keys = {}
